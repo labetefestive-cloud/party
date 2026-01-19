@@ -6,6 +6,8 @@ const RIPPLE_DURATION = 600; // milliseconds
 // Confetti animation
 function createConfetti() {
   const confettiContainer = document.querySelector('.confetti-container');
+  if (!confettiContainer) return; // Guard against missing container
+  
   const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#ffa500', '#ff69b4'];
   
   // Clear existing confetti to prevent DOM bloat
@@ -62,4 +64,4 @@ document.querySelector('.links').addEventListener('click', function(e) {
   console.log(`Navigating to: ${link.href}`);
 });
 
-// Add ripple animation is now defined in styles.css
+// Ripple animation keyframes are now defined in styles.css
