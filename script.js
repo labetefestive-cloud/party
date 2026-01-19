@@ -1,3 +1,8 @@
+// Constants for ripple effect
+const RIPPLE_SIZE = 20;
+const RIPPLE_HALF_SIZE = RIPPLE_SIZE / 2;
+const RIPPLE_DURATION = 600; // milliseconds
+
 // Confetti animation
 function createConfetti() {
   const confettiContainer = document.querySelector('.confetti-container');
@@ -43,32 +48,18 @@ document.querySelector('.links').addEventListener('click', function(e) {
   ripple.style.position = 'absolute';
   ripple.style.borderRadius = '50%';
   ripple.style.background = 'rgba(255, 255, 255, 0.6)';
-  ripple.style.width = '20px';
-  ripple.style.height = '20px';
-  ripple.style.left = e.clientX - link.getBoundingClientRect().left - 10 + 'px';
-  ripple.style.top = e.clientY - link.getBoundingClientRect().top - 10 + 'px';
-  ripple.style.animation = 'ripple 0.6s ease-out';
+  ripple.style.width = RIPPLE_SIZE + 'px';
+  ripple.style.height = RIPPLE_SIZE + 'px';
+  ripple.style.left = e.clientX - link.getBoundingClientRect().left - RIPPLE_HALF_SIZE + 'px';
+  ripple.style.top = e.clientY - link.getBoundingClientRect().top - RIPPLE_HALF_SIZE + 'px';
+  ripple.style.animation = `ripple ${RIPPLE_DURATION}ms ease-out`;
   ripple.style.pointerEvents = 'none';
   
   link.appendChild(ripple);
   
-  setTimeout(() => ripple.remove(), 600);
+  setTimeout(() => ripple.remove(), RIPPLE_DURATION);
   
   console.log(`Navigating to: ${link.href}`);
 });
 
-// Add ripple animation
-const style = document.createElement('style');
-style.textContent = `
-  @keyframes ripple {
-    from {
-      transform: scale(0);
-      opacity: 1;
-    }
-    to {
-      transform: scale(4);
-      opacity: 0;
-    }
-  }
-`;
-document.head.appendChild(style);
+// Add ripple animation is now defined in styles.css
